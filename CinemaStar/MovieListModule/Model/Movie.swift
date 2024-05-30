@@ -4,7 +4,7 @@
 import Foundation
 
 /// Модель фильма
-struct Movie {
+struct Movie: Hashable {
     let posterURL: String
     let name: String
     let rating: Double

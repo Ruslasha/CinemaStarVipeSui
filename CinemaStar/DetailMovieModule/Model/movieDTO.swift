@@ -25,7 +25,7 @@ struct MovieDTO: Codable {
 }
 
 /// Постер
-struct Poster: Codable {
+struct Poster: Codable, Hashable {
     let url: String?
 }
 
@@ -45,13 +45,13 @@ struct RatingKP: Codable {
 }
 
 /// Актеры
-struct Person: Codable {
+struct Person: Codable, Hashable {
     let photo: String
     let name: String?
 }
 
 /// Похожие фильмы
-struct SimilarMovie: Codable {
+struct SimilarMovie: Codable, Hashable {
     let name: String
     let poster: Poster
 }
