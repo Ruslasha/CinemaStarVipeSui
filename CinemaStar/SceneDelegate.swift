@@ -6,23 +6,21 @@ import UIKit
 /// SceneDelegate
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
-    private var appCoordinator: AppCoordinator?
+    var builder: Builder?
 
     func scene(
         _ scene: UIScene,
         willConnectTo session: UISceneSession,
-
         options connectionOptions: UIScene.ConnectionOptions
     ) {
-        setupWindow(withScene: scene)
-    }
-
-    private func setupWindow(withScene scene: UIScene) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
+        let navigationController = UINavigationController()
+
+        builder = Builder(navigationController: navigationController)
+        builder?.createMovieListModule()
+
         window = UIWindow(windowScene: windowScene)
-        window?.backgroundColor = .systemBackground
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
-        appCoordinator = AppCoordinator()
-        appCoordinator?.start()
     }
 }

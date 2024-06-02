@@ -11,12 +11,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         do {
-            try KeychainService.instance.saveToken("WQT8GHV-ZYH45ES-PE33B08-KNRNHJ2", forKey: "TokenKP")
+            KeychainManager.shared.saveToken("WQT8GHV-ZYH45ES-PE33B08-KNRNHJ2")
         } catch {
             print(error)
         }
 
-//        urlRequest.setValue("WQT8GHV-ZYH45ES-PE33B08-KNRNHJ2", forHTTPHeaderField: "X-API-KEY")
         return true
     }
 

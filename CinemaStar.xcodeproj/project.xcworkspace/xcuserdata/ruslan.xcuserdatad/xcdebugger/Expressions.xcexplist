@@ -6,13 +6,10 @@
          contextName = "ActorsTableViewCell.collectionView(_:cellForItemAt:):ActorsTableViewCell.swift">
       </ContextState>
       <ContextState
-         contextName = "MovieListViewController.viewDidLayoutSubviews():MovieListViewController.swift">
+         contextName = "MovieListViewController.collectionView(_:numberOfItemsInSection:):MovieListViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "movieCollection">
-            </PersistentString>
-            <PersistentString
-               value = "moviePostersCollection">
+               value = "movieCollection.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -39,6 +36,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #1 in closure #1 in MovieDetailedSUI.mainView.getter:DetailMovieViewSUI.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "movieDetails">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "DetailMovieViewController.tableView(_:cellForRowAt:):DetailMovieViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -47,21 +52,16 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "MovieListViewModel.init():MovieListViewModel.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "updateViewData">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "APIRequest.execute(withCompletion:):APIRequest.swift">
       </ContextState>
       <ContextState
          contextName = "MovieListViewController.collectionView(_:cellForItemAt:):MovieListViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "moviePostersCollection">
+               value = "movieCollection[indexPath.item].poster.url">
             </PersistentString>
             <PersistentString
-               value = "movieCollection[indexPath.item].poster.url">
+               value = "moviePostersCollection">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -82,7 +82,12 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "APIRequest.execute(withCompletion:):APIRequest.swift">
+         contextName = "MovieListViewModel.init():MovieListViewModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "updateViewData">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "MovieListViewModel.startFetch():MovieListViewModel.swift">
@@ -112,18 +117,21 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "RecomendationsTableViewCell.setSelected(_:animated:):RecomendationTableViewCell.swift">
+         contextName = "MovieListViewController.viewDidLayoutSubviews():MovieListViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "movieDetail">
+               value = "movieCollection">
+            </PersistentString>
+            <PersistentString
+               value = "moviePostersCollection">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "MovieListViewController.collectionView(_:numberOfItemsInSection:):MovieListViewController.swift">
+         contextName = "RecomendationsTableViewCell.setSelected(_:animated:):RecomendationTableViewCell.swift">
          <PersistentStrings>
             <PersistentString
-               value = "movieCollection.count">
+               value = "movieDetail">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
