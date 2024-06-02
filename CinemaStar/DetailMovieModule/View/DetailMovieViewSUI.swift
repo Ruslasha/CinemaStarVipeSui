@@ -7,7 +7,10 @@
 
 import SwiftUI
 
-struct MovieDetailedSUI: View {
+protocol DetailMovieViewProtocol {
+}
+
+struct MovieDetailedSUI: View, DetailMovieViewProtocol {
 
     private enum Constants {
         static let watchText = "Смотреть"
@@ -15,9 +18,11 @@ struct MovieDetailedSUI: View {
         static let actorsTitle = "Актеры и съемочная группа"
         static let languageTitle = "Язык"
         static let recomendationTitle = "Смотрите также"
+        static let movie = "Фильм"
+        static let series = "Сериал"
     }
 
-    @State var movieDetail: MovieDetail
+    @ObservedObject var presenter: DetailMoviePresenter
 
     var body: some View {
 
@@ -31,6 +36,9 @@ struct MovieDetailedSUI: View {
 
             .padding()
         }
+        .onAppear {
+            presenter.viewDidLoad()
+        }
 
     }
 
@@ -39,16 +47,26 @@ struct MovieDetailedSUI: View {
 
             HStack(spacing: 16) {
 
-                Image(.orig)
-                    .resizable()
-                    .clipShape(RoundedRectangle(cornerRadius: 8))
-                    .frame(height: 200)
-                    .frame(minWidth: 0, maxWidth: .infinity)
+                if let posterURL = presenter.detailMovie?.poster, let url = URL(string: posterURL) {
+                    AsyncImage(url: url) { image in
+                        image
+                            .image?.resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .cornerRadius(8)
+                            .frame(maxWidth: 170, maxHeight: 200)
+                            .padding(.leading, -15)
+                    }
+                } else {
+                    RoundedRectangle(cornerRadius: 8)
+                        .fill(.gray)
+                        .frame(width: 170, height: 200)
+                        .padding(.leading, -15)
+                }
 
                 VStack(alignment: .leading) {
                     Text("")
                         .frame(minWidth: 0, maxWidth: .infinity)
-                    Text(movieDetail.name)
+                    Text(presenter.detailMovie?.name ?? "")
                         .font(Font(UIFont.verdana(ofSize: 18) ?? .systemFont(ofSize: 18)))
 
                     Text(ratingText)
@@ -76,7 +94,7 @@ struct MovieDetailedSUI: View {
 
             })
 
-            Text(movieDetail.description)
+            Text(presenter.detailMovie?.description ?? "")
                 .lineLimit(5)
                 .foregroundStyle(.white)
 
@@ -87,20 +105,20 @@ struct MovieDetailedSUI: View {
             Text(Constants.actorsTitle)
                 .font(Font(UIFont.verdana(ofSize: 14) ?? .systemFont(ofSize: 14)))
                 .foregroundStyle(.white)
-            if movieDetail.actors?.isEmpty != nil {
-                actorsScrollView
-            }
+
+            actorsScrollView
+
             VStack(alignment: .leading, spacing: 4) {
                 Text(Constants.languageTitle)
                     .font(Font(UIFont.verdana(ofSize: 14) ?? .systemFont(ofSize: 14)))
                     .foregroundStyle(.white)
-                Text(movieDetail.language)
+                Text(presenter.detailMovie?.language ?? "")
                     .font(Font(UIFont.verdana(ofSize: 14) ?? .systemFont(ofSize: 14)))
                     .foregroundStyle(.darkGreen)
             }
-            if !movieDetail.recommendedMovies.isEmpty {
-                similarMoviesView
-            }
+
+            similarMoviesView
+
         }
 
     }
@@ -110,62 +128,40 @@ struct MovieDetailedSUI: View {
             let gridItem = GridItem(.fixed(97))
             LazyHGrid(rows: [gridItem], spacing: 22, content: {
 
-                ForEach(movieDetail.actors ?? mockActors, id: \.self) { person in
-                    ActorViewCellSUI(person: person)
+                ForEach(presenter.detailMovie?.actorsNames.indices ?? 0..<1, id: \.self) { index in
+                    ActorViewCellSUI(actorName: presenter.detailMovie?.actorsNames[index] ?? "", actorImage: presenter.detailMovie?.actorsPhotos[index] ?? "")
                 }
 
             })
         }
-        .frame(height: 97)
+        .frame(height: 110)
     }
 
     private var similarMoviesView: some View {
+
         VStack(alignment: .leading) {
-            Text(Constants.recomendationTitle)
-                .font(Font(UIFont.verdana(ofSize: 14) ?? .systemFont(ofSize: 14)))
-                .foregroundStyle(.white)
-            ScrollView(.horizontal) {
-                let gridItem = GridItem(.fixed(248))
-                LazyHGrid(rows: [gridItem], spacing: 14, content: {
-                    ForEach(movieDetail.recommendedMovies, id: \.self) { movie in
-                        RecomendationMovieView(movie: movie)
-                    }
-                })
+            if let movies = presenter.detailMovie?.similarMovies, !movies.isEmpty {
+                Text(Constants.recomendationTitle)
+                    .font(Font(UIFont.verdana(ofSize: 14) ?? .systemFont(ofSize: 14)))
+                    .foregroundStyle(.white)
+                ScrollView(.horizontal) {
+                    let gridItem = GridItem(.fixed(248))
+                    LazyHGrid(rows: [gridItem], spacing: 14, content: {
+                        ForEach(movies, id: \.id) { movie in
+                            RecomendationMovieView(movie: movie)
+                        }
+                    })
+                }
+                .frame(height: 248)
             }
-            .frame(height: 248)
         }
     }
 
     private  var movieDataText: String {
-        "\(movieDetail.year) / \(movieDetail.country) / \(movieDetail.type.typeDescription)"
+        "\(String(presenter.detailMovie?.year ?? 0000)) / \(presenter.detailMovie?.country ?? "") / \(presenter.detailMovie?.type == "movie" ? Constants.movie : Constants.series)"
     }
 
     private var ratingText: String {
-        Constants.starMark + " " + String(format: "%0.1f", movieDetail.rating)
+        Constants.starMark + " " + String(format: "%0.1f", presenter.detailMovie?.rating ?? 0)
     }
-
-    private var mockActors: [Person] {
-            var outputArray = [Person]()
-            for i in 0...9 {
-                outputArray.append(Person(photo: "https://image.openmoviedb.com/kinopoisk-images/1946459/bf93b465-1189-4155-9dd1-cb9fb5cb1bb5/orig", name: "Actor Name\(i)"))
-            }
-            return outputArray
-        }
-
-    }
-
-    #Preview {
-        MovieDetailedSUI(movieDetail:
-                            MovieDetail(dto:
-                                            MovieDTO(id: 2,
-                                                     poster: Poster(url: "https://image.openmoviedb.com/kinopoisk-images/1946459/bf93b465-1189-4155-9dd1-cb9fb5cb1bb5/orig"),
-                                                     name: "Furious 77",
-                                                     rating: RatingKP(kp: 9.892),
-                                                     description: "Deckard Shaw seeks revenge against Dominic Toretto and his family for his comatose brother. In the five years since the events of Fast and Furious 6, street racer Dominic Toretto, former cop, Brian O'Conner, racer Letty Ortiz, and the crew have lived peaceful years after Owen Shaw's demise.",
-                                                     year: 2023,
-                                                     countries: [Country(name: "Russia")],
-                                                     type: .movie,
-                                                     persons: [Person(photo: "https://image.openmoviedb.com/kinopoisk-images/10768063/aaf31049-6437-4022-bb67-4fad82773cff/orig", name: "Verona")],
-                                                     spokenLanguages: ["Russian"],
-                                                     similarMovies: [SimilarMovie(name: "Furious 948", poster: Poster(url: "https://image.openmoviedb.com/kinopoisk-images/10768063/aaf31049-6437-4022-bb67-4fad82773cff/orig"))])))
-    }
+}
