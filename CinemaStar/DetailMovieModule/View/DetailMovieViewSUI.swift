@@ -21,7 +21,7 @@ struct MovieDetailedSUI: View, DetailMovieViewProtocol {
         static let movie = "Фильм"
         static let series = "Сериал"
     }
-
+    @Environment(\.presentationMode) private var presentation
     @ObservedObject var presenter: DetailMoviePresenter
 
     var body: some View {
@@ -36,6 +36,7 @@ struct MovieDetailedSUI: View, DetailMovieViewProtocol {
 
             .padding()
         }
+        .navigationBarHidden(true)
         .onAppear {
             presenter.viewDidLoad()
         }
@@ -44,7 +45,18 @@ struct MovieDetailedSUI: View, DetailMovieViewProtocol {
 
     private var mainView: some View {
         VStack(alignment: .leading, spacing: 16) {
-
+            HStack {
+                Button(action: {
+                    presentation.wrappedValue.dismiss()
+                }, label: {
+                    Image(systemName: "chevron.left")
+                        .foregroundColor(.black)
+                        .font(.title2)
+                })
+                Spacer()
+            }
+            .padding(.top, 10)
+            .padding(.bottom)
             HStack(spacing: 16) {
 
                 if let posterURL = presenter.detailMovie?.poster, let url = URL(string: posterURL) {

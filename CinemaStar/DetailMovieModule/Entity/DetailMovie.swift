@@ -9,6 +9,7 @@ import Foundation
 
 /// Детали фильма
 struct DetailMovie {
+    var id: Int
     /// Постер
     var poster: String?
     /// Название

@@ -51,6 +51,7 @@ struct MoviesDTO: Codable {
 
 /// Детали фильма
 struct MovieDetailsDTO: Codable {
+    let id: Int
     /// Тип -
     let type: String
     /// Название

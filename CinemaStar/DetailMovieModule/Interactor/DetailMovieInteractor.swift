@@ -20,7 +20,7 @@ final class DetailMovieInteractor: DetailMovieInteractorProtocol {
     private var cancellables = Set<AnyCancellable>()
     
     func fetchMovieDetailsCombine(movieId: Int, completion: @escaping (Result<DetailMovie, Error>) -> Void) {
-        networkService.getMovieDetailsCombine(id: movieId)
+        networkService.getMovieDetailsCache(id: movieId)
             .sink { result in
                 switch result {
                 case .finished:
