@@ -15,7 +15,7 @@ class NetworkService {
         static let baseURLDetails = "https://api.kinopoisk.dev/v1.4/movie/"
         static let tokenHeader = "X-API-KEY"
 
-        static let token = "WQT8GHV-ZYH45ES-PE33B08-KNRNHJ2"
+//        static let token = "WQT8GHV-ZYH45ES-PE33B08-KNRNHJ2"
     }
 
     func fetchMoviesList(query: String) -> AnyPublisher<[Movie], Error> {
@@ -32,7 +32,12 @@ class NetworkService {
         var request = URLRequest(url: url)
 
         request.httpMethod = "GET"
-        request.addValue(Constants.token, forHTTPHeaderField: Constants.tokenHeader)
+
+        guard let token = KeychainManager.shared.loadToken() else {
+            print("No token")
+            return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
+        }
+        request.addValue(token, forHTTPHeaderField: Constants.tokenHeader)
 
         return URLSession.shared.dataTaskPublisher(for: request)
             .map (\.data)
@@ -50,7 +55,11 @@ class NetworkService {
 
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        request.addValue(Constants.token, forHTTPHeaderField: Constants.tokenHeader)
+        guard let token = KeychainManager.shared.loadToken() else {
+            print("No token")
+            return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
+        }
+        request.addValue(token, forHTTPHeaderField: Constants.tokenHeader)
 
         return URLSession.shared.dataTaskPublisher(for: request)
             .map(\.data)

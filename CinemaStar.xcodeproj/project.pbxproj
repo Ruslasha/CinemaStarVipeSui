@@ -29,6 +29,7 @@
 		44F99AD62C09EE6100FE2F0E /* DetailMoviePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F99AD52C09EE6100FE2F0E /* DetailMoviePresenter.swift */; };
 		44F99AD82C09EE8700FE2F0E /* DetailMovieInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F99AD72C09EE8700FE2F0E /* DetailMovieInteractor.swift */; };
 		44F99ADA2C09EEAC00FE2F0E /* DetailMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F99AD92C09EEAC00FE2F0E /* DetailMovie.swift */; };
+		DFD27D3D2DA09E025E991140 /* Pods_CinemaStar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDA239055C022F003FCBF4ED /* Pods_CinemaStar.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,9 @@
 		44F99AD52C09EE6100FE2F0E /* DetailMoviePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMoviePresenter.swift; sourceTree = "<group>"; };
 		44F99AD72C09EE8700FE2F0E /* DetailMovieInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMovieInteractor.swift; sourceTree = "<group>"; };
 		44F99AD92C09EEAC00FE2F0E /* DetailMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMovie.swift; sourceTree = "<group>"; };
+		8BF195693077462FEEC7D7C9 /* Pods-CinemaStar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CinemaStar.release.xcconfig"; path = "Target Support Files/Pods-CinemaStar/Pods-CinemaStar.release.xcconfig"; sourceTree = "<group>"; };
+		96A870E3D43CBDCE3C7472A0 /* Pods-CinemaStar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CinemaStar.debug.xcconfig"; path = "Target Support Files/Pods-CinemaStar/Pods-CinemaStar.debug.xcconfig"; sourceTree = "<group>"; };
+		FDA239055C022F003FCBF4ED /* Pods_CinemaStar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CinemaStar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,17 +67,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFD27D3D2DA09E025E991140 /* Pods_CinemaStar.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C3F3F4638FD992317282E01 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				96A870E3D43CBDCE3C7472A0 /* Pods-CinemaStar.debug.xcconfig */,
+				8BF195693077462FEEC7D7C9 /* Pods-CinemaStar.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		4406484A2BD6CEAD0029E2E5 = {
 			isa = PBXGroup;
 			children = (
 				440648552BD6CEAD0029E2E5 /* CinemaStar */,
 				440648542BD6CEAD0029E2E5 /* Products */,
+				1C3F3F4638FD992317282E01 /* Pods */,
+				D9C4497DC2ED3A6F3B31EBAB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -267,6 +284,14 @@
 			path = Entity;
 			sourceTree = "<group>";
 		};
+		D9C4497DC2ED3A6F3B31EBAB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FDA239055C022F003FCBF4ED /* Pods_CinemaStar.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -274,9 +299,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 440648672BD6CEAE0029E2E5 /* Build configuration list for PBXNativeTarget "CinemaStar" */;
 			buildPhases = (
+				80695F38B0384CA4FC318C01 /* [CP] Check Pods Manifest.lock */,
 				4406484F2BD6CEAD0029E2E5 /* Sources */,
 				440648502BD6CEAD0029E2E5 /* Frameworks */,
 				440648512BD6CEAD0029E2E5 /* Resources */,
+				A6809AE43DEF5ABEAF8698E1 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -331,6 +358,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		80695F38B0384CA4FC318C01 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CinemaStar-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A6809AE43DEF5ABEAF8698E1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CinemaStar/Pods-CinemaStar-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CinemaStar/Pods-CinemaStar-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CinemaStar/Pods-CinemaStar-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4406484F2BD6CEAD0029E2E5 /* Sources */ = {
@@ -495,6 +564,7 @@
 		};
 		440648682BD6CEAE0029E2E5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96A870E3D43CBDCE3C7472A0 /* Pods-CinemaStar.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -522,6 +592,7 @@
 		};
 		440648692BD6CEAE0029E2E5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8BF195693077462FEEC7D7C9 /* Pods-CinemaStar.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
